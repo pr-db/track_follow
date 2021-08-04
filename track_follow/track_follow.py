@@ -9,7 +9,7 @@ from rcl_interfaces.msg import ParameterDescriptor
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import Float64
-from nxp_cup_interfaces.msg import PixyVector
+from robocon_interfaces.msg import PixyVector
 from time import sleep
 from datetime import datetime
 import numpy as np
@@ -17,7 +17,7 @@ import numpy as np
 class LineFollow(Node):
 
     def __init__(self):
-        super().__init__('aim_line_follow')
+        super().__init__('track_follow')
 
 
         start_delay_descriptor = ParameterDescriptor(

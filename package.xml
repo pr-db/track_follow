@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>aim_line_follow</name>
+  <name>track_follow</name>
   <version>0.0.1</version>
-  <description>Line follower for NXP Gazebo simulation (AIM Version)</description>
-  <maintainer email="landon.haugh@nxp.com">landon</maintainer>
+  <description>Track Following for Gazebo simulation </description>
+  <maintainer email="hewsnbn@gmail.com">hewhoshallnotbenamed</maintainer>
   <license>Apache License 2.0</license>
 
   <test_depend>ament_copyright</test_depend>
@@ -14,7 +14,7 @@
 
   <exec_depend>rclpy</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>nxp_cup_interfaces</exec_depend>
+  <exec_depend>robocon_interfaces</exec_depend>
   <exec_depend>std_msgs</exec_depend>
 
   <export>

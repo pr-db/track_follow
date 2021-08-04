@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'aim_line_follow'
+package_name = 'track_follow'
 
 setup(
     name=package_name,
@@ -13,14 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Landon Haugh',
-    maintainer_email='landon.haugh@nxp.com',
-    description='Line follower for NXP Gazebo simulation (AIM Version)',
+    maintainer='hewhoshallnotbenamed',
+    maintainer_email='hewsnbn@gmail.com',
+    description='Line follower for robocon Gazebo simulation',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'line_follower = aim_line_follow.aim_line_follow:main',
+            'line_follower = track_follow.track_follow:main',
         ],
     },
 )
