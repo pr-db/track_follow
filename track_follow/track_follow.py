@@ -49,7 +49,7 @@ class LineFollow(Node):
         self.declare_parameter("linear_velocity", 1.25, 
             linear_velocity_descriptor)
 
-        self.declare_parameter("angular_velocity", 1.5, 
+        self.declare_parameter("angular_velocity", 1.8, 
             angular_velocity_descriptor)
 
         self.declare_parameter("single_line_steer_scale", 0.5, 
