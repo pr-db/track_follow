@@ -19,51 +19,12 @@ class LineFollow(Node):
     def __init__(self):
         super().__init__('track_follow')
 
-
-        start_delay_descriptor = ParameterDescriptor(
-            type=ParameterType.PARAMETER_DOUBLE,
-            description='Seconds to delay before starting.')
-
-        camera_vector_topic_descriptor = ParameterDescriptor(
-            type=ParameterType.PARAMETER_STRING,
-            description='Namespaceing with camera topic.')
         
-        linear_velocity_descriptor = ParameterDescriptor(
-            type=ParameterType.PARAMETER_DOUBLE,
-            description='Linear velocity for vehicle motion (m/s).')
-
-        angular_velocity_descriptor = ParameterDescriptor(
-            type=ParameterType.PARAMETER_DOUBLE,
-            description='Angular velocity for vehicle motion (rad/s).')
-
-        single_line_steer_scale_descriptor = ParameterDescriptor(
-            type=ParameterType.PARAMETER_DOUBLE,
-            description='Single found line steer scaling.')
-        
-        self.declare_parameter("start_delay", 15.0, 
-            start_delay_descriptor)
-        
-        self.declare_parameter("camera_vector_topic", "/cupcar0/PixyVector", 
-            camera_vector_topic_descriptor)
-        
-        self.declare_parameter("linear_velocity", 1.25, 
-            linear_velocity_descriptor)
-
-        self.declare_parameter("angular_velocity", 1.5, 
-            angular_velocity_descriptor)
-
-        self.declare_parameter("single_line_steer_scale", 0.5, 
-            single_line_steer_scale_descriptor)
-
-        self.start_delay = float(self.get_parameter("start_delay").value)
-
-        self.camera_vector_topic = str(self.get_parameter("camera_vector_topic").value)
-
-        self.linear_velocity = float(self.get_parameter("linear_velocity").value)
-
-        self.angular_velocity = float(self.get_parameter("angular_velocity").value)
-
-        self.single_line_steer_scale = float(self.get_parameter("single_line_steer_scale").value)
+        self.start_delay =5.0
+        self.camera_vector_topic = "/cupcar0/PixyVector"
+        self.linear_velocity = 2.0
+        self.angular_velocity = -1.0
+        self.single_line_steer_scale = 1.0
 
         # Time to wait before running
         self.get_logger().info('Waiting to start for {:s}'.format(str(self.start_delay)))
@@ -144,7 +105,7 @@ class LineFollow(Node):
             else:
                 steer = 0
                 if (self.start_time+4.0) > current_time:
-                    speed = self.linear_velocity * ((current_time-self.start_time)/4.0)*0.9
+                    speed = self.linear_velocity * ((current_time-self.start_time)/4.0)*2.0
                 if (self.start_time+4.0) <= current_time:
                     speed = self.linear_velocity*0.9
 
@@ -155,11 +116,11 @@ class LineFollow(Node):
             m_x1 = (msg.m0_x1 + msg.m1_x1) / 2
             steer = self.angular_velocity*(m_x1 - window_center) / frame_width
             if (self.start_time+4.0) > current_time:
-                speed = self.linear_velocity * ((current_time-self.start_time)/4.0)
+                speed = self.linear_velocity * ((current_time-self.start_time)/2.0)
             if (self.start_time+4.0) <= current_time:
                 speed = self.linear_velocity
 
-        self.speed_vector.x = float(speed*(1-np.abs(2.0*steer)))
+        self.speed_vector.x = float(speed*(1-np.abs(1.0*steer)))
         self.steer_vector.z = float(steer)
 
         self.cmd_vel.linear = self.speed_vector
