@@ -65,7 +65,6 @@ class LineFollow(Node):
         y = 0
         steer = 0
         speed = 2.0
-        num_vectors = self.get_num_vectors(msg)
 
         self.speed_vector.x = float(speed*(1-np.abs(1.0*steer)))
         self.steer_vector.z = float(steer)
