@@ -9,7 +9,7 @@ from rcl_interfaces.msg import ParameterDescriptor
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import Float64
-from robocon_interfaces.msg import PixyVector
+from robo_interfaces.msg import PixyVector
 from time import sleep
 from datetime import datetime
 import numpy as np

@@ -15,7 +15,7 @@ setup(
     zip_safe=True,
     maintainer='hewhoshallnotbenamed',
     maintainer_email='hewsnbn@gmail.com',
-    description='Line follower for robocon Gazebo simulation',
+    description='Line follower for robo Gazebo simulation',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
