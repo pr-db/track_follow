@@ -76,50 +76,6 @@ class LineFollow(Node):
         speed = 0
         num_vectors = self.get_num_vectors(msg)
 
-        if(num_vectors == 0):
-            if self.restart_time:
-                self.start_time = datetime.now().timestamp()
-                self.restart_time = False
-            if (self.start_time+4.0) > current_time:
-                speed = self.linear_velocity * (4.0-(current_time-self.start_time))/4.0
-            if (self.start_time+4.0) <= current_time:
-                speed = 0
-            steer = 0
-
-        if(num_vectors == 1):
-            if not self.restart_time:
-                self.start_time = datetime.now().timestamp()
-                self.restart_time = True
-            if(msg.m0_x1 > msg.m0_x0):
-                x = (msg.m0_x1 - msg.m0_x0) / frame_width
-                y = (msg.m0_y1 - msg.m0_y0) / frame_height
-            else:
-                x = (msg.m0_x0 - msg.m0_x1) / frame_width
-                y = (msg.m0_y0 - msg.m0_y1) / frame_height
-            if(msg.m0_x0 != msg.m0_x1 and y != 0):
-                steer = (-self.angular_velocity) * (x / y) * self.single_line_steer_scale
-                if (self.start_time+4.0) > current_time:
-                    speed = self.linear_velocity * ((current_time-self.start_time)/4.0)
-                if (self.start_time+4.0) <= current_time:
-                    speed = self.linear_velocity
-            else:
-                steer = 0
-                if (self.start_time+4.0) > current_time:
-                    speed = self.linear_velocity * ((current_time-self.start_time)/4.0)*0.9
-                if (self.start_time+4.0) <= current_time:
-                    speed = self.linear_velocity*0.9
-
-        if(num_vectors == 2):
-            if not self.restart_time:
-                self.start_time = datetime.now().timestamp()
-                self.restart_time = True
-            m_x1 = (msg.m0_x1 + msg.m1_x1) / 2
-            steer = self.angular_velocity*(m_x1 - window_center) / frame_width
-            if (self.start_time+4.0) > current_time:
-                speed = self.linear_velocity * ((current_time-self.start_time)/4.0)
-            if (self.start_time+4.0) <= current_time:
-                speed = self.linear_velocity
-
         self.speed_vector.x = float(speed*(1-np.abs(2.0*steer)))
         self.steer_vector.z = float(steer)
 
